@@ -4,18 +4,18 @@ LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=6b46e938a20b07191fa895000af16167"
 DEPENDS = "virtual/libx11 libxft"
 RDEPENDS_${PN} = "ttf-dejavu-sans xrandr"
 
-SRCREV = "271"
-PV = "0.8.5+svnr${SRCPV}"
 PR = "r4"
 EXTRA_OEMAKE = 'all -C ${S}'
 
-SRC_URI = "svn://dzen.googlecode.com/svn/;module=trunk;protocol=http \
-	   file://dzen-extras.tar.gz \
-	   file://Makefile"
+SRC_URI = "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/dzen/dzen2-${PV}.tar.gz \
+          file://dzen-extras.tar.gz \
+          file://Makefile"
 
-S = "${WORKDIR}/trunk"
+S = "${WORKDIR}/dzen2-${PV}"
 
 FILES_${PN} = "/usr/bin /usr/share/dzen"
+
+LDFLAGS += "-pthread"
 
 do_configure() {
 	install -m 0644 ${WORKDIR}/Makefile ${S}/Makefile
@@ -34,5 +34,5 @@ do_install() {
 	oe_runmake install DESTDIR=${D}
 }
 
-SRC_URI[md5sum] = "5978620c2124c8a8ad52d7f17ce94fd7"
-SRC_URI[sha256sum] = "5e4ce96e8ed22a4a0ad6cfafacdde0532d13d049d77744214b196c4b2bcddff9"
+SRC_URI[md5sum] = "d1ecf6607e66dc53d030bb32a75f6be6"
+SRC_URI[sha256sum] = "793840866b4f297fe99e4c632f8d3d0fcff2618c889bf384b48f7d4db5a23337"
